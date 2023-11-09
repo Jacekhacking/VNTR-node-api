@@ -16,5 +16,9 @@ router.post('/signup', async (req, res) => {
   res.send('create new user');
 });
 
+router.delete('/:id', async (req, res) => {
+  console.log('Delete user by id');
+});
+
 // Export router
 export default router;
