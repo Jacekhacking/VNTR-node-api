@@ -1,13 +1,21 @@
 import express from 'express';
 const router = express.Router();
+import { query } from '../../db/index.js';
 
 router.get('/', async (req, res) => {
   console.log('Get all users');
-  res.send('Get all users route');
+  const result = await query('SELECT * FROM user_name;');
+  console.log(result.rows);
+  res.send(result.rows);
 });
 
-router.get('/login', async (req, res) => {
+router.post('/create', async (req, res) => {
   console.log('login user');
+  const text =
+    'INSERT INTO user_name(first_name, last_name) VALUES ($1, $2) RETURNING *';
+  const values = ['Jacek', 'Hacking'];
+  const result = await query(text, values);
+
   res.send('login route');
 });
 
