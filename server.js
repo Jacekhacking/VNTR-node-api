@@ -1,5 +1,6 @@
 import express from 'express';
 import { json, urlencoded } from 'express';
+
 import routes from './routes/index.js';
 
 const app = express();
