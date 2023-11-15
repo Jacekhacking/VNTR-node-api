@@ -4,7 +4,7 @@ import { query } from '../../db/index.js';
 
 router.get('/', async (req, res) => {
   console.log('Get all users');
-  const result = await query('SELECT * FROM user_name;');
+  const result = await query('SELECT * FROM users;');
   console.log(result.rows);
   res.send(result.rows);
 });
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 router.post('/create', async (req, res) => {
   console.log('login user');
   const text =
-    'INSERT INTO user_name(first_name, last_name) VALUES ($1, $2) RETURNING *';
+    'INSERT INTO users (first_name, last_name) VALUES ($1, $2) RETURNING *';
   const values = ['Jacek', 'Hacking'];
   const result = await query(text, values);
 
