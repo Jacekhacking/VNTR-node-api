@@ -4,12 +4,12 @@ const router = express.Router();
 import userRoutes from './users.js';
 import tripsRoutes from './trips.js';
 import userLists from './lists.js';
-import achievmentRoutes from './achievments.js';
+import achievementRoutes from './achievements.js';
 
 router.use('/trips', tripsRoutes);
 router.use('/users', userRoutes);
 router.use('/lists', userLists);
-router.use('/achievments', achievmentRoutes);
+router.use('/achievements', achievementRoutes);
 
 // fallback
 router.get('/', async (req, res) => {
