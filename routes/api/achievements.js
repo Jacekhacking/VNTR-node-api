@@ -3,30 +3,47 @@ const router = express.Router();
 import { query } from '../../db/index.js';
 
 router.get('/', async (req, res) => {
-    console.log('Get them Chevos');
+    console.log('Show all Chevos');
     const result = await query('SELECT * FROM achievements');
-    console.log(result.rows);
+
     res.send(result.rows);
 });
 
 router.get('/:id', async (req, res) => {
-    console.log(`Get single Chevos ${req.params.id}`);
-    let achievementId = req.params.id;
-    const result = await query(`SELECT * FROM achievements WHERE id = ${achievementId}`);
-    console.log(result.rows);
-    res.send(result.rows);
+    console.log(`Show only ${req.params.id} Chevo`);
+    const achievementId = req.params.id;
+    const statement = 'SELECT * FROM achievements WHERE id = $1';
+    const result = await query(statement, [achievementId]);
+
+    res.send(result.rows[0]);
 });
 
 router.post('/', async (req, res) => {
     console.log('Create new Chevo');
+    const { title, description, image } = req.body;
+    const statement = 'INSERT INTO achievements (title, description, image) VALUES ($1, $2, $3)';
+    const result = await query(statement, [title, description, image]);
+
+    res.send(result.rows);
 });
   
 router.put('/:id', async (req, res) => {
     console.log(`Update chevo id: ${req.params.id}`);
+    const achievementId = req.params.id;
+    const { title, description, image } = req.body;
+    const statement = 'UPDATE achievements SET title = $1, description = $2, image = $3 WHERE id = $4';
+    const result = await query(statement, [title, description, image, achievementId]);
+
+    res.send(result.rows[0])
 });
   
 router.delete('/:id', async (req, res) => {
-    console.log(`Delete chevo id: ${req.params.id}`);
+    console.log(`Delete Chevo id: ${req.params.id}`);
+    const achievementId = req.params.id;
+    const statement = 'DELETE FROM achievements WHERE id = $1';
+    const result = await query(statement, [achievementId])
+
+    res.send(result.rows)
 });
 
 export default router;
