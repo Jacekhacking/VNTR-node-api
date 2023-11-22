@@ -4,7 +4,8 @@ import { query } from '../../db/index.js';
 
 router.get('/', async (req, res) => {
     console.log('Show all Chevos');
-    const result = await query('SELECT * FROM achievements');
+    const statement = 'SELECT * FROM achievements';
+    const result = await query(statement);
 
     res.send(result.rows);
 });
