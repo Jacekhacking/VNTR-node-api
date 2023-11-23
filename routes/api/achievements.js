@@ -12,9 +12,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     console.log(`Show only ${req.params.id} Chevo`);
-    const achievementId = req.params.id;
+    const achievement_id = req.params.id;
     const statement = 'SELECT * FROM achievements WHERE id = $1';
-    const result = await query(statement, [achievementId]);
+    const result = await query(statement, [achievement_id]);
 
     res.send(result.rows[0]);
 });
@@ -30,19 +30,19 @@ router.post('/', async (req, res) => {
   
 router.put('/:id', async (req, res) => {
     console.log(`Update chevo id: ${req.params.id}`);
-    const achievementId = req.params.id;
+    const achievement_id = req.params.id;
     const { title, description, image } = req.body;
     const statement = 'UPDATE achievements SET title = $1, description = $2, image = $3 WHERE id = $4';
-    const result = await query(statement, [title, description, image, achievementId]);
+    const result = await query(statement, [title, description, image, achievement_id]);
 
     res.send(result.rows[0])
 });
   
 router.delete('/:id', async (req, res) => {
     console.log(`Delete Chevo id: ${req.params.id}`);
-    const achievementId = req.params.id;
+    const achievement_id = req.params.id;
     const statement = 'DELETE FROM achievements WHERE id = $1';
-    const result = await query(statement, [achievementId])
+    const result = await query(statement, [achievement_id])
 
     res.send(result.rows)
 });

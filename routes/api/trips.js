@@ -16,9 +16,9 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   console.log('create single trip');
-  const { tripName } = req.body;
-  const statement = 'INSERT INTO trips (tripName) VALUES ($1)';
-  const result = await query(statement, [tripName]);
+  const { trip_name } = req.body;
+  const statement = 'INSERT INTO trips (trip_name) VALUES ($1)';
+  const result = await query(statement, [trip_name]);
 
   res.send(result.rows);
 });

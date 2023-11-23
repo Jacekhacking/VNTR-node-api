@@ -11,17 +11,17 @@ CREATE TABLE achievements (
     title VARCHAR(120) NOT NULL,
     description VARCHAR(255) NOT NULL,
     image VARCHAR(255),
-    timesEarned INTEGER NOT NULL default 0
+    times_earned INTEGER NOT NULL default 0
 );
 
 CREATE TABLE trips (
     id SERIAL PRIMARY KEY,
-    tripName VARCHAR(255) NOT NULL
+    trip_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE userAchievements (
     id SERIAL PRIMARY KEY,
-    userId SERIAL REFERENCES users(id),
-    achievementId SERIAL REFERENCES achievements(id),
-    tripEarned SERIAL REFERENCES trips(id)
+    user_id SERIAL REFERENCES users(id),
+    achievement_id SERIAL REFERENCES achievements(id),
+    trip_id SERIAL REFERENCES trips(id)
 );
