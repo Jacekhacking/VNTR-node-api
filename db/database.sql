@@ -1,27 +1,39 @@
 CREATE DATABASE advntr_db;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id uuid DEFAULT uuid_generate_v4 (),
     first_name VARCHAR(20) NOT NULL,
-    last_name VARCHAR(20) NOT NULL
+    last_name VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE achievements (
-    id SERIAL PRIMARY KEY,
+    id uuid DEFAULT uuid_generate_v4 (),
     title VARCHAR(120) NOT NULL,
     description VARCHAR(255) NOT NULL,
     image VARCHAR(255),
-    times_earned INTEGER NOT NULL default 0
+    times_earned INTEGER NOT NULL default 0,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE trips (
-    id SERIAL PRIMARY KEY,
-    trip_name VARCHAR(255) NOT NULL
+    id uuid DEFAULT uuid_generate_v4 (),
+    trip_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE userAchievements (
-    id SERIAL PRIMARY KEY,
-    user_id SERIAL REFERENCES users(id),
-    achievement_id SERIAL REFERENCES achievements(id),
-    trip_id SERIAL REFERENCES trips(id)
+    id uuid DEFAULT uuid_generate_v4 (),
+    user_id uuid REFERENCES users(id),
+    achievement_id uuid REFERENCES achievements(id),
+    trip_id uuid REFERENCES trips(id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE tripAchievements (
+    id uuid DEFAULT uuid_generate_v4 (),
+    trip_id uuid REFERENCES trips(id),
+    achievement_id uuid REFERENCES achievements(id),
+    PRIMARY KEY (id)
 );

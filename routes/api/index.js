@@ -1,23 +1,22 @@
 import express from 'express';
 const router = express.Router();
 
-import userRoutes from './users.js';
-import tripsRoutes from './trips.js';
-import userLists from './lists.js';
 import achievementRoutes from './achievements.js';
+import listRoutes from './lists.js';
+import tripsRoutes from './trips.js';
+import tripAchievementRoutes from './tripAchievements.js';
+import userRoutes from './users.js';
 import userAchievementRoutes from './userAchievements.js';
 
-router.use('/trips', tripsRoutes);
-router.use('/users', userRoutes);
-router.use('/lists', userLists);
-router.use('/achievements', achievementRoutes);
-router.use('/userAchievements', userAchievementRoutes);
-
-// fallback
 router.get('/', async (req, res) => {
-  console.log('hit api example');
-  res.send('This is an example route');
+  res.send('Fallback Route');
 });
 
-// Export the router
+router.use('/achievements', achievementRoutes);
+router.use('/lists', listRoutes);
+router.use('/trips', tripsRoutes);
+router.use('/tripAchievements', tripAchievementRoutes);
+router.use('/users', userRoutes);
+router.use('/userAchievements', userAchievementRoutes);
+
 export default router;
